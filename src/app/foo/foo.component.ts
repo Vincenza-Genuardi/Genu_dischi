@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Foo } from './foo.model';
+import {articolo} from  './foo.model';
 
 @Component({
   selector: 'app-foo',
@@ -13,8 +14,8 @@ export class FooComponent {
   dataGet: Object;
   dataPost: Object;
   o :Observable<Object>;
-  fooData : Foo[];
-  oFoo : Observable<Foo[]>;
+  fooData : articolo[];
+  oFoo : Observable<articolo[]>;
 
   constructor(public http: HttpClient) {
 
@@ -25,7 +26,7 @@ export class FooComponent {
     this.loading = true; 
     //Facciamo una get e otteniamo l'oggetto Observable che attende la risposta
     //this.o = this.http.get('https://my-json-server.typicode.com/PaoloCarugati/dischi/records/1');
-    this.o = this.http.get('https://my-json-server.typicode.com/PaoloCarugati/dischi/records/');
+    this.o = this.http.get('https://my-json-server.typicode.com/Vincenza-Genuardi/angular-reddit/articoli');
     //Attacchiamo all'Observable o un metodo "observer" che verrà lanciato quando arriva la 
     //risposta
     this.o.subscribe(this.getData);
@@ -46,7 +47,7 @@ export class FooComponent {
    makeCompactRequest(): void {
     this.loading = true;
     this.http
-      .get('https://my-json-server.typicode.com/PaoloCarugati/dischi/records/1')
+      .get('https://my-json-server.typicode.com/Vincenza-Genuardi/angular-reddit/articoli')
       .subscribe(d => {
         this.dataGet = d;
         this.loading = false;
@@ -57,7 +58,7 @@ export class FooComponent {
    makeTypedRequest() : void
    {
      //oFoo : Observable<Foo[]>; va dichiarato tra gli attributi della classe 
-     this.oFoo = this.http.get<Foo[]>('https://my-json-server.typicode.com/PaoloCarugati/dischi/records');
+     this.oFoo = this.http.get<articolo[]>('https://my-json-server.typicode.com/Vincenza-Genuardi/angular-reddit/articoli');
      this.oFoo.subscribe(d => {this.fooData = d;});
    }  
  
@@ -67,13 +68,12 @@ export class FooComponent {
   makeCompactPost(): void {
     this.loading = true;
     this.http
-      .post('https://my-json-server.typicode.com/PaoloCarugati/dischi/records',
+      .post('https://my-json-server.typicode.com/Vincenza-Genuardi/angular-reddit/articoli',
         JSON.stringify({
-          "id": 5,
-          "title": "Storia di un minuto",
-          "artist": "PFM",
-          "year": 1972,
-          "company": "Numero Uno"      
+          "id": 1,
+          "titolo": "google",
+          "url": "google.com",
+          "like": 23     
         })
       )
       .subscribe(d => {
